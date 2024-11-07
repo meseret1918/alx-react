@@ -1,17 +1,18 @@
-/* Main CSS file */
-
-/* Style for the logo element */
-#logo {
-    width: 200px;         /* Set the width of the logo */
-    height: 200px;        /* Set the height of the logo */
-    background-image: url('../assets/holberton-logo.jpg'); /* Set the background image */
-    background-size: cover; /* Ensure the background image covers the entire element */
-    background-position: center; /* Center the background image */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
 }
 
-/* Style for the counter text */
-#count {
-    font-weight: bold; /* Make the text bold */
-    float: right;     /* Position the text to the right of the button */
+.header {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
 

@@ -1,40 +1,63 @@
-import { shallow } from 'enzyme';
 import React from 'react';
+import { shallow } from 'enzyme';
 import App from './App';
+import Notifications from '../Notifications/Notifications';
+import Header from '../Header/Header';
+import Login from '../Login/Login';
+import Footer from '../Footer/Footer';
+import CourseList from '../CourseList/CourseList';
 
-describe('<App />', () => {
-  it('renders without crashing', () => {
+describe('Test App.js', () => {
+  it('App without crashing', (done) => {
+    expect(shallow(<App />).exists());
+    done();
+  });
+
+  it('div with the class App-header', (done) => {
     const wrapper = shallow(<App />);
+    expect(wrapper.contains(<header className='App-header' />))
+    done()
   });
 
-  it('contain Notifications component', () => {
+  it('div with the class App-body', (done) => {
     const wrapper = shallow(<App />);
-    expect(wrapper.find('Notifications')).toHaveLength(1);
+    expect(wrapper.contains(<body className='App-body' />))
+    done();
   });
 
-  it('contain Header component', () => {
+  it('div with the class App-footer', (done) => {
     const wrapper = shallow(<App />);
-    expect(wrapper.find('Header')).toHaveLength(1);
+    expect(wrapper.contains(<footer className='App-footer' />))
+    done();
   });
 
-  it('contain Login component', () => {
+  it('contains the Notifications component', () => {
     const wrapper = shallow(<App />);
-    expect(wrapper.find('Login')).toHaveLength(1);
+    expect(wrapper.find(Notifications)).toHaveLength(1);
+    expect(wrapper.find(Header)).toHaveLength(1);
+    expect(wrapper.find(Login)).toHaveLength(1);
+    expect(wrapper.find(Footer)).toHaveLength(1);
   });
 
-  it('contain Footer component', () => {
-    const wrapper = shallow(<App />);
-    expect(wrapper.find('Footer')).toHaveLength(1);
+  it('Test to check that CourseLis is not displayed inside App', () => {
+    const wrapper = shallow(<App isLoggedIn={false} />);
+    expect(wrapper.find(CourseList)).toHaveLength(0);
   });
 
-  it('CourseList', () => {
-    const wrapper = shallow(<App />);
-    expect(wrapper.find('CourseList')).toHaveLength(0);
-  });
-
-  it('isLoggedIn true', () => {
-    const wrapper = shallow(<App isLoggedIn />);
-    expect(wrapper.find('Login')).toHaveLength(0);
-    expect(wrapper.find('CourseList')).toHaveLength(1);
-  });
 });
+
+describe('Testing <App isLoggedIn={true} />', () => {
+  // beforeEach(() => {
+  //   const wrapper = shallow(<App isLoggedIn={true}/>);
+  // });
+
+  it("the Login component is not included", () => {
+    const wrapper = shallow(<App isLoggedIn={true}/>);
+    expect(wrapper.find('Login')).toHaveLength(0);
+  });
+
+  it('the CourseList component is included', () => {
+    const wrapper = shallow(<App isLoggedIn={true}/>);
+    expect(wrapper.find('CourseList').exists());
+  })
+})

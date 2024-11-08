@@ -22,23 +22,31 @@ class App extends Component {
   constructor(props) {
     super(props);
   }
+
   render() {
     const { isLoggedIn } = this.props;
+
     return (
       <Fragment>
         <Notifications listNotifications={listNotifications} />
         <Header />
-        {isLoggedIn ? <CourseList listCourses={listCourses} /> : <Login />}
+        {isLoggedIn ? (
+          <CourseList listCourses={listCourses} />
+        ) : (
+          <Login />
+        )}
         <Footer />
       </Fragment>
     );
   }
 }
 
+// Default props ensure isLoggedIn is false if not provided
 App.defaultProps = {
   isLoggedIn: false,
 };
 
+// PropTypes validation for type checking
 App.propTypes = {
   isLoggedIn: PropTypes.bool,
 };

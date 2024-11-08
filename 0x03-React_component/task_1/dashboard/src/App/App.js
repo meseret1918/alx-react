@@ -22,12 +22,13 @@ class App extends Component {
   constructor(props) {
     super(props);
   }
+  
   render() {
-    const { isLoggedIn } = this.props;
+    const { isLoggedIn, logOut } = this.props;
     return (
       <Fragment>
         <Notifications listNotifications={listNotifications} />
-        <Header />
+        <Header logOut={logOut} />
         {isLoggedIn ? <CourseList listCourses={listCourses} /> : <Login />}
         <Footer />
       </Fragment>
@@ -37,10 +38,12 @@ class App extends Component {
 
 App.defaultProps = {
   isLoggedIn: false,
+  logOut: () => {}, // Provide default empty function for logOut prop
 };
 
 App.propTypes = {
   isLoggedIn: PropTypes.bool,
+  logOut: PropTypes.func, // Define the logOut prop type as a function
 };
 
 export default App;

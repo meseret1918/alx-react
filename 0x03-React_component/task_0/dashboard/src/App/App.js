@@ -1,15 +1,8 @@
-import React, { Component } from 'react';
+import { render } from '@testing-library/react';
+import App from './App';
 
-class App extends Component {
-  render() {
-    const { isLoggedIn } = this.props;
-    return <div>{isLoggedIn ? "Logged In" : "Please Log In"}</div>;
-  }
-}
-
-App.defaultProps = {
-  isLoggedIn: false,
-};
-
-export default App;
+test('renders the expected output', () => {
+  const { container } = render(<App />);
+  expect(container.textContent).toBe('Please Log In'); // Expecting "Please Log In" by default
+});
 

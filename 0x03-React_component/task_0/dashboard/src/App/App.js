@@ -1,23 +1,14 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
 class App extends Component {
   render() {
     const { isLoggedIn } = this.props;
-    return (
-      <Fragment>
-        {isLoggedIn ? <p>Logged In</p> : <p>Please Log In</p>}
-      </Fragment>
-    );
+    return <div>{isLoggedIn ? "Logged In" : "Please Log In"}</div>;
   }
 }
 
 App.defaultProps = {
   isLoggedIn: false,
-};
-
-App.propTypes = {
-  isLoggedIn: PropTypes.bool,
 };
 
 export default App;

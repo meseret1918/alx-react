@@ -12,6 +12,7 @@ const listCourses = [
   { id: 2, name: 'Webpack', credit: 20 },
   { id: 3, name: 'React', credit: 40 },
 ];
+
 const listNotifications = [
   { id: 1, type: 'default', value: 'New course available' },
   { id: 2, type: 'urgent', value: 'New resume available' },
@@ -22,13 +23,13 @@ class App extends Component {
   constructor(props) {
     super(props);
   }
-  
+
   render() {
     const { isLoggedIn, logOut } = this.props;
     return (
       <Fragment>
         <Notifications listNotifications={listNotifications} />
-        <Header logOut={logOut} />
+        <Header />
         {isLoggedIn ? <CourseList listCourses={listCourses} /> : <Login />}
         <Footer />
       </Fragment>
@@ -36,14 +37,16 @@ class App extends Component {
   }
 }
 
+// Define the default value for logOut as an empty function
 App.defaultProps = {
   isLoggedIn: false,
-  logOut: () => {}, // Provide default empty function for logOut prop
+  logOut: () => {}, // Default empty function for logOut
 };
 
+// Define propTypes, including logOut as a function type
 App.propTypes = {
   isLoggedIn: PropTypes.bool,
-  logOut: PropTypes.func, // Define the logOut prop type as a function
+  logOut: PropTypes.func, // Ensures logOut is a function
 };
 
 export default App;

@@ -24,14 +24,17 @@ class App extends Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
+  // Lifecycle method to add the event listener on mount
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeyDown);
   }
 
+  // Lifecycle method to remove the event listener on unmount
   componentWillUnmount() {
     document.removeEventListener('keydown', this.handleKeyDown);
   }
 
+  // Handler for keyboard events
   handleKeyDown(event) {
     if (event.ctrlKey && event.key === 'h') {
       alert('Logging you out');
@@ -52,11 +55,13 @@ class App extends Component {
   }
 }
 
+// Default props in case logOut is not passed
 App.defaultProps = {
   isLoggedIn: false,
   logOut: () => {},
 };
 
+// Prop type validation
 App.propTypes = {
   isLoggedIn: PropTypes.bool,
   logOut: PropTypes.func,

@@ -6,9 +6,8 @@ export default function CourseListRow({
   textFirstCell,
   textSecondCell,
 }) {
-
-  const rowStyle = { backgroundColor: '#f5f5f5ab' }
-  const headerStyle = { backgroundColor: '#deb5b545' }
+  const rowStyle = { backgroundColor: "#f5f5f5ab" };
+  const headerStyle = { backgroundColor: "#deb5b545" };
 
   if (isHeader) {
     if (textSecondCell === null) {
@@ -29,7 +28,7 @@ export default function CourseListRow({
     return (
       <tr style={rowStyle}>
         <td>{textFirstCell}</td>
-        <td>{textSecondCell}</td>
+        <td>{textSecondCell !== null ? textSecondCell : 0}</td> {/* Default to 0 */}
       </tr>
     );
   }
@@ -43,5 +42,5 @@ CourseListRow.defaultProps = {
 CourseListRow.propTypes = {
   isHeader: PropTypes.bool,
   textFirstCell: PropTypes.string.isRequired,
-  textSecondCell: PropTypes.oneOfType([PropTypes.string, PropTypes.number]) 
+  textSecondCell: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };

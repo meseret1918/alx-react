@@ -1,0 +1,10 @@
+/* Default row styles */
+tr {
+  height: 50px;
+}
+
+/* Row styling when checked */
+tr[style*="background-color: #e6e4e4;"] {
+  background-color: #e6e4e4;
+}
+

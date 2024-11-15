@@ -1,29 +1,34 @@
-// Notifications.test.js
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
-import Notifications from './Notifications';
-import '@testing-library/jest-dom';
+// task_0/dashboard/src/Notifications/Notifications.test.js
 
-describe('Notifications', () => {
-  it('should display the notifications correctly', () => {
-    const notifications = [
-      { id: 1, message: 'New course available' },
-      { id: 2, message: 'Maintenance update' },
-    ];
-    const { getByText } = render(<Notifications notifications={notifications} markNotificationAsRead={() => {}} />);
-    expect(getByText('New course available')).toBeInTheDocument();
-    expect(getByText('Maintenance update')).toBeInTheDocument();
+import React from 'react';
+import { shallow } from 'enzyme';
+import Notifications from './Notifications';
+
+describe('Notifications Component', () => {
+  it('should call handleDisplayDrawer when the button is clicked', () => {
+    const handleDisplayDrawer = jest.fn();
+    const wrapper = shallow(
+      <Notifications 
+        displayDrawer={false}
+        handleDisplayDrawer={handleDisplayDrawer}
+        handleHideDrawer={() => {}}
+      />
+    );
+    wrapper.find('button').at(0).simulate('click');
+    expect(handleDisplayDrawer).toHaveBeenCalled();
   });
 
-  it('should call markNotificationAsRead when a notification is clicked', () => {
-    const mockMarkAsRead = jest.fn();
-    const notifications = [
-      { id: 1, message: 'New course available' },
-    ];
-    const { getByText } = render(<Notifications notifications={notifications} markNotificationAsRead={mockMarkAsRead} />);
-    
-    fireEvent.click(getByText('New course available'));
-    expect(mockMarkAsRead).toHaveBeenCalledWith(1);
+  it('should call handleHideDrawer when the close button is clicked', () => {
+    const handleHideDrawer = jest.fn();
+    const wrapper = shallow(
+      <Notifications 
+        displayDrawer={true}
+        handleDisplayDrawer={() => {}}
+        handleHideDrawer={handleHideDrawer}
+      />
+    );
+    wrapper.find('button').at(1).simulate('click');
+    expect(handleHideDrawer).toHaveBeenCalled();
   });
 });
 

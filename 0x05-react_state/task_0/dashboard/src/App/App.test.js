@@ -1,22 +1,25 @@
+// task_0/dashboard/src/App/App.test.js
+
 import React from 'react';
 import { shallow } from 'enzyme';
 import App from './App';
 
 describe('App Component', () => {
-  it('should have a default state with displayDrawer set to false', () => {
+  it('should have default state of displayDrawer as false', () => {
     const wrapper = shallow(<App />);
     expect(wrapper.state('displayDrawer')).toBe(false);
   });
 
-  it('should set displayDrawer to true when handleDisplayDrawer is called', () => {
+  it('should update displayDrawer to true after calling handleDisplayDrawer', () => {
     const wrapper = shallow(<App />);
     wrapper.instance().handleDisplayDrawer();
     expect(wrapper.state('displayDrawer')).toBe(true);
   });
 
-  it('should set displayDrawer to false when handleHideDrawer is called', () => {
+  it('should update displayDrawer to false after calling handleHideDrawer', () => {
     const wrapper = shallow(<App />);
-    wrapper.instance().handleHideDrawer();
+    wrapper.instance().handleDisplayDrawer(); // set to true
+    wrapper.instance().handleHideDrawer(); // set to false
     expect(wrapper.state('displayDrawer')).toBe(false);
   });
 });

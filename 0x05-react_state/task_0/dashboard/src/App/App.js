@@ -1,37 +1,27 @@
-import React, { Component } from 'react';
-import Notifications from '../Notifications/Notifications';
+// App.js
+import React, { useState } from 'react';
+import Notifications from './Notifications/Notifications';
+import Footer from './Footer/Footer';
+import './App.css';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      displayDrawer: false,
-    };
+const App = () => {
+  const [notifications, setNotifications] = useState([
+    { id: 1, message: 'New course available' },
+    { id: 2, message: 'Maintenance update' },
+    { id: 3, message: 'System outage' },
+  ]);
 
-    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
-    this.handleHideDrawer = this.handleHideDrawer.bind(this);
-  }
+  const markNotificationAsRead = (id) => {
+    setNotifications(notifications.filter(notification => notification.id !== id));
+  };
 
-  handleDisplayDrawer() {
-    this.setState({ displayDrawer: true });
-  }
-
-  handleHideDrawer() {
-    this.setState({ displayDrawer: false });
-  }
-
-  render() {
-    const { displayDrawer } = this.state;
-    return (
-      <div className="App">
-        <Notifications
-          displayDrawer={displayDrawer}
-          handleDisplayDrawer={this.handleDisplayDrawer}
-          handleHideDrawer={this.handleHideDrawer}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="App">
+      <Notifications notifications={notifications} markNotificationAsRead={markNotificationAsRead} />
+      <Footer />
+    </div>
+  );
+};
 
 export default App;
+

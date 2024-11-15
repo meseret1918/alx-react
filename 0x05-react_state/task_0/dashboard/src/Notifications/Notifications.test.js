@@ -1,33 +1,29 @@
+// Notifications.test.js
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, fireEvent } from '@testing-library/react';
 import Notifications from './Notifications';
+import '@testing-library/jest-dom';
 
-describe('Notifications Component', () => {
-  const mockHandleDisplayDrawer = jest.fn();
-  const mockHandleHideDrawer = jest.fn();
-
-  it('should call handleDisplayDrawer when "Your notifications" is clicked', () => {
-    const wrapper = shallow(
-      <Notifications
-        displayDrawer={false}
-        handleDisplayDrawer={mockHandleDisplayDrawer}
-        handleHideDrawer={mockHandleHideDrawer}
-      />
-    );
-    wrapper.find('div').first().simulate('click');
-    expect(mockHandleDisplayDrawer).toHaveBeenCalled();
+describe('Notifications', () => {
+  it('should display the notifications correctly', () => {
+    const notifications = [
+      { id: 1, message: 'New course available' },
+      { id: 2, message: 'Maintenance update' },
+    ];
+    const { getByText } = render(<Notifications notifications={notifications} markNotificationAsRead={() => {}} />);
+    expect(getByText('New course available')).toBeInTheDocument();
+    expect(getByText('Maintenance update')).toBeInTheDocument();
   });
 
-  it('should call handleHideDrawer when close button is clicked', () => {
-    const wrapper = shallow(
-      <Notifications
-        displayDrawer={true}
-        handleDisplayDrawer={mockHandleDisplayDrawer}
-        handleHideDrawer={mockHandleHideDrawer}
-      />
-    );
-    wrapper.find('button').simulate('click');
-    expect(mockHandleHideDrawer).toHaveBeenCalled();
+  it('should call markNotificationAsRead when a notification is clicked', () => {
+    const mockMarkAsRead = jest.fn();
+    const notifications = [
+      { id: 1, message: 'New course available' },
+    ];
+    const { getByText } = render(<Notifications notifications={notifications} markNotificationAsRead={mockMarkAsRead} />);
+    
+    fireEvent.click(getByText('New course available'));
+    expect(mockMarkAsRead).toHaveBeenCalledWith(1);
   });
 });
 

@@ -1,37 +1,38 @@
-// task_0/dashboard/src/Notifications/Notifications.js
-
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Notifications = ({ displayDrawer, handleDisplayDrawer, handleHideDrawer }) => {
-  return (
-    <div>
-      <button onClick={handleDisplayDrawer}>
-        Your notifications
-      </button>
-      {displayDrawer && (
-        <div className="notifications-panel">
-          <button onClick={handleHideDrawer}>Close</button>
-          <p>Here are your notifications!</p>
-        </div>
-      )}
-    </div>
-  );
-};
+class Notifications extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    return nextProps.displayDrawer !== this.props.displayDrawer;
+  }
 
-// Define propTypes for the component
+  render() {
+    const { displayDrawer, handleDisplayDrawer, handleHideDrawer } = this.props;
+
+    return (
+      <div className="Notifications">
+        <div className="menuItem" onClick={handleDisplayDrawer}>
+          Your notifications
+        </div>
+        {displayDrawer && (
+          <div className="NotificationPanel">
+            <button onClick={handleHideDrawer}>Close</button>
+            <p>Here are your notifications</p>
+          </div>
+        )}
+      </div>
+    );
+  }
+}
+
 Notifications.propTypes = {
-  displayDrawer: PropTypes.bool.isRequired,
+  displayDrawer: PropTypes.bool,
   handleDisplayDrawer: PropTypes.func.isRequired,
   handleHideDrawer: PropTypes.func.isRequired,
 };
 
-// Define defaultProps for the component
 Notifications.defaultProps = {
   displayDrawer: false,
-  handleDisplayDrawer: () => {},
-  handleHideDrawer: () => {},
 };
 
 export default Notifications;
-

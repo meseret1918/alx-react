@@ -1,33 +1,35 @@
-// task_0/dashboard/src/App/App.js
-
 import React, { Component } from 'react';
 import Notifications from '../Notifications/Notifications';
-import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    // Initializing local state for displayDrawer
+    // Set the default state for displayDrawer
     this.state = {
       displayDrawer: false,
     };
+    // Bind the methods
+    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
+    this.handleHideDrawer = this.handleHideDrawer.bind(this);
   }
 
-  // Function to show the notifications drawer
-  handleDisplayDrawer = () => {
+  // Change displayDrawer to true
+  handleDisplayDrawer() {
     this.setState({ displayDrawer: true });
-  };
+  }
 
-  // Function to hide the notifications drawer
-  handleHideDrawer = () => {
+  // Change displayDrawer to false
+  handleHideDrawer() {
     this.setState({ displayDrawer: false });
-  };
+  }
 
   render() {
+    const { displayDrawer } = this.state;
+
     return (
       <div className="App">
-        <Notifications 
-          displayDrawer={this.state.displayDrawer}
+        <Notifications
+          displayDrawer={displayDrawer}
           handleDisplayDrawer={this.handleDisplayDrawer}
           handleHideDrawer={this.handleHideDrawer}
         />
@@ -37,4 +39,3 @@ class App extends Component {
 }
 
 export default App;
-

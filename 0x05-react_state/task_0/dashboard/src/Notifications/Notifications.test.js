@@ -1,34 +1,31 @@
-// task_0/dashboard/src/Notifications/Notifications.test.js
-
 import React from 'react';
 import { shallow } from 'enzyme';
 import Notifications from './Notifications';
 
-describe('Notifications Component', () => {
-  it('should call handleDisplayDrawer when the button is clicked', () => {
-    const handleDisplayDrawer = jest.fn();
+describe('<Notifications />', () => {
+  it('calls handleDisplayDrawer when clicking on menu item', () => {
+    const handleDisplayDrawerMock = jest.fn();
     const wrapper = shallow(
-      <Notifications 
+      <Notifications
         displayDrawer={false}
-        handleDisplayDrawer={handleDisplayDrawer}
+        handleDisplayDrawer={handleDisplayDrawerMock}
         handleHideDrawer={() => {}}
       />
     );
-    wrapper.find('button').at(0).simulate('click');
-    expect(handleDisplayDrawer).toHaveBeenCalled();
+    wrapper.find('.menuItem').simulate('click');
+    expect(handleDisplayDrawerMock).toHaveBeenCalled();
   });
 
-  it('should call handleHideDrawer when the close button is clicked', () => {
-    const handleHideDrawer = jest.fn();
+  it('calls handleHideDrawer when clicking on close button', () => {
+    const handleHideDrawerMock = jest.fn();
     const wrapper = shallow(
-      <Notifications 
+      <Notifications
         displayDrawer={true}
         handleDisplayDrawer={() => {}}
-        handleHideDrawer={handleHideDrawer}
+        handleHideDrawer={handleHideDrawerMock}
       />
     );
-    wrapper.find('button').at(1).simulate('click');
-    expect(handleHideDrawer).toHaveBeenCalled();
+    wrapper.find('button').simulate('click');
+    expect(handleHideDrawerMock).toHaveBeenCalled();
   });
 });
-
